@@ -1,0 +1,47 @@
+#include <iostream>
+#include <cmath>
+#include <math.h>
+
+using namespace std;
+
+double potegowanie(double, int);
+long int silnia(int);
+//-------------------------------------------------------
+double sinus(double wynik, int n, double x, double eps=0.00001)
+{
+    if(x == 0) return 0;
+
+	if(eps>=fabs(potegowanie(-1, n) * (potegowanie(x, 2*(n+1)) / silnia(2*n+1))) && wynik!=0) return wynik;
+
+	wynik += (potegowanie(-1,n) * (potegowanie(x,2*n+1) / silnia(2*n+1)));
+
+	return sinus(wynik,n+1,x);
+}
+//----------------------------------------------------------
+int main()
+{
+	int n = 0;
+	double suma=0.0, x;
+	cout<<"Podaj kat z jakeigo sinus obliczyc: ";
+	cin>>x;
+	x = (M_PI * x)/180;
+    cout<<"Sin("<<x<<") = "<<sinus(suma,n,x);
+}
+
+double potegowanie(double x, int n)
+{
+	if(n == 0) return 1;
+
+	if(n%2 == 1) return x*potegowanie(x, n-1);
+
+	float pot = potegowanie(x, n/2);
+
+    return  pot * pot;
+}
+
+long int silnia(int n)
+{
+	if(n<2) return 1;
+
+	return n*silnia(n-1);
+}
