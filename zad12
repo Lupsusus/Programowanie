@@ -1,0 +1,83 @@
+#include <iostream>
+#include <ctime>
+#include <cstdlib>
+
+
+using namespace std;
+
+void wypelnij2(int **tab,int n,int m)
+{
+    if(n>0)
+    {
+        tab[m-1][n-1]=rand()%10;
+        wypelnij2(tab,n-1,m);
+    }
+}
+
+void wypelnij(int **tab,int n,int m)
+{
+    if(m>0)
+    {
+        wypelnij2(tab,n,m);
+        wypelnij(tab,n-1,m-1);
+
+    }
+}
+
+void przepisz2(int **tab,int n,int m)
+{
+    if(n>0)
+    {
+        tab[n-1][m-1]=tab[m-1][n-1];
+        przepisz2(tab,n-1,m);
+    }
+}
+
+void przepisz(int **tab,int n,int m)
+{
+    if(m>0)
+    {
+        przepisz2(tab,n,m);
+        przepisz(tab,n-1,m-1);
+    }
+}
+
+void wypisz2(int **tab,int n,int m)
+{
+    if(m>0)
+    {
+        cout<<tab[n-1][m-1]<<" ";
+        wypisz2(tab,n,m-1);
+    }
+}
+
+void wypisz(int **tab,int n,int m)
+{
+    if(n>0)
+    {
+        wypisz2(tab,n,m);
+        cout<<endl;
+        wypisz(tab,n-1,m);
+    }
+}
+
+int main()
+{
+    srand(time(NULL));
+    int n = rand()%5+6;
+    int **tab = new int*[n];
+    for(int i=0;i<n;i++)
+        tab[i] = new int[n];
+
+    for(int i=0;i<n;i++)
+        for(int j=0;j<n;j++)
+            tab[i][j] = 0;
+
+    wypelnij(tab,n-1,n);
+    wypisz(tab,n,n);
+    cout<<endl<<endl;
+    przepisz(tab,n,n);
+    wypisz(tab,n,n);
+
+    return 0;
+}
