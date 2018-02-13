@@ -1,0 +1,89 @@
+/*Napisz program, który wype³ni liczbami losowymi rzeczywistymi z przedzia³u <1,9)
+lew¹ doln¹ czêœæ tablicy dwuwymiarowej kwadratowej o wymiarach NxN, N>5 i
+N<=10, a nastêpnie przekopiuje wartoœci do prawej górnej. Wypisz tablicê z danymi
+pocz¹tkowymi i koñcowymi, u¿yj formatu z dwoma cyframi po kropce. Do
+wype³nienia tablicy liczbami pseudolosowymi, kopiowania danych i wypisania tablicy
+zdefiniuj funkcje rekurencyjne*. */
+#include <iostream>
+#include <cstdlib>
+#include <time.h>
+#include <iomanip>
+using namespace std;
+
+
+void wypelnij2(float **tab,int n,int m)
+{
+    if(n>0)
+    {
+        tab[m-1][n-1]=1.0+9.0*rand()/(RAND_MAX);
+        wypelnij2(tab,n-1,m);
+    }
+}
+
+void wypelnij(float **tab,int n,int m)
+{
+    if(m>0)
+    {
+        wypelnij2(tab,n,m);
+        wypelnij(tab,n-1,m-1);
+
+    }
+}
+
+void przepisz2(float **tab,int n,int m)
+{
+    if(n>0)
+    {
+        tab[n-1][m-1]=tab[m-1][n-1];
+        przepisz2(tab,n-1,m);
+    }
+}
+
+void przepisz(float **tab,int n,int m)
+{
+    if(m>0)
+    {
+        przepisz2(tab,n,m);
+        przepisz(tab,n-1,m-1);
+    }
+}
+
+void wypisz2(float **tab,int n,int m)
+{
+    if(m>0)
+    {
+        cout<<fixed<<setprecision(2)<<tab[n-1][m-1]<<" ";
+        wypisz2(tab,n,m-1);
+    }
+}
+
+void wypisz(float **tab,int n,int m)
+{
+    if(n>0)
+    {
+        wypisz2(tab,n,m);
+        cout<<endl;
+        wypisz(tab,n-1,m);
+    }
+}
+
+int main()
+{
+    srand(time(NULL));
+    int n = 5;
+    float **tab = new float*[n];
+    for(int i=0;i<n;i++)
+        tab[i] = new float[n];
+
+    for(int i=0;i<n;i++)
+        for(int j=0;j<n;j++)
+            tab[i][j] = 0;
+
+
+    wypelnij(tab,n-1,n);
+    wypisz(tab,n,n);
+    przepisz(tab,n,n);
+    cout<<endl;
+    wypisz(tab,n,n);
+
+}
