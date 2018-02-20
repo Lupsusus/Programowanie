@@ -1,0 +1,28 @@
+#include <iostream> //czy liczba jest palindromem
+#include <sstream>
+using namespace std;
+
+void f2(string a,int n,int i)
+{
+    if(i<=a.length()-1)
+    {
+    if(a.at(i)==a.at(n-1))
+        f2(a,n-1,i+1);
+    else
+        cout<<"Nie jest palindromem";
+    }
+    else
+        cout<<"Palindrom";
+}
+
+int main()
+{
+
+    int liczba,n,i=0;
+    cin>>liczba;
+    ostringstream ss;
+    ss << liczba;
+    string str = ss.str();
+    n=str.length();
+    f2(str,n,i);
+}
