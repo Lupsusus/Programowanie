@@ -1,0 +1,56 @@
+package javaapplication2;
+
+import java.util.Scanner;
+import java.util.Random;
+
+public class Tablice {
+    
+    int n,m,tab[],tablica[];
+    
+    static Random rnd = new Random();
+    
+        public Tablice(int n, int m)
+        {
+            tab=new int[n];
+            tablica=new int[m];
+        }
+        
+        public int[] wypelnij()
+        {
+                    for(int i=0;i<tab.length;i++)
+        {
+            tab[i]= rnd.nextInt(5)+1;
+        }
+        return tab; 
+        }
+        public int[] wypelnij1()
+        {
+                for(int i=0;i<tablica.length;i++)
+        {           
+            tablica[i]= rnd.nextInt(5)+1;          
+        }
+                
+        return tablica;
+        }
+        
+        public int licznosc()
+        {   
+            int ile=0;
+        
+                        for(int i=0;i<tab.length;i++){
+            if(tab[i]>1 && tab[i]<5)
+                ile++;
+            }
+                        for(int i=0;i<tablica.length;i++){
+            if(tablica[i]>1 && tablica[i]<5)
+                ile++;
+            }
+            
+            return ile;
+        }
+        public void wypisz()
+        {
+            if(licznosc()==1 || licznosc()==1)
+                System.out.println("WYJATEK");
+        }
+}
