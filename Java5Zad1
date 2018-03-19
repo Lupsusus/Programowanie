@@ -1,0 +1,70 @@
+package zad1;
+
+
+import java.util.Scanner;
+
+
+
+public class Zad1 {
+
+
+    static Scanner sc = new Scanner(System.in);
+    
+    public static void main(String[] args) throws NewException{
+        try{
+        System.out.println("Podaj licznik");
+        int licznik=sc.nextInt();
+        if(licznik<0)
+            throw new NewException("Ulamek mniejszy od 0");
+
+        System.out.println("Podaj mianownik");
+        int mianownik=sc.nextInt();
+        
+        Ulamek u1=new Ulamek();
+        Ulamek u2=new Ulamek(licznik,mianownik);
+        
+        u1.wypisz();
+        u2.wypisz();
+        
+        dodawanie(u1, u2);
+        
+        System.out.println("U1 podzielone przez u2: "+dzielenie1(u1,u2) +"/"+ dzielenie2(u1,u2));
+        }
+        catch(NewException e)
+        {
+            System.err.println(e);
+        }
+    }
+   
+    public static void dodawanie(Ulamek u1,Ulamek u2)
+    {      
+        int licznik;
+        if(u1.getMianownik()==u2.getMianownik()){
+        licznik =u1.getLicznik()+u2.getLicznik();
+        System.out.println("Ulamki po dodaniu:"+licznik+"/"+u1.mianownik);
+        }
+        else{
+          int licznik1=u1.getLicznik()*u2.getMianownik();
+          int mianownik=u1.getMianownik()*u2.getMianownik();
+          
+          int licznik2=u2.getLicznik()*u1.getMianownik();
+          
+          
+          int pom=licznik1+licznik2;
+          
+          System.out.println("Ulamki po dodaniu: "+pom+"/"+mianownik);
+        }
+    }
+             
+    public static int dzielenie1(Ulamek u1, Ulamek u2)
+    {
+        return u1.getLicznik()*u2.getMianownik();
+    }
+    public static int dzielenie2(Ulamek u1, Ulamek u2)
+    {
+        return u1.getMianownik()*u2.getLicznik();
+    }
+    
+    
+}
+
