@@ -1,0 +1,101 @@
+package wektory;
+ 
+public class Wektor {
+    private float x;
+    private float y;
+    private float z;
+   
+    public Wektor(float x, float y, float z){
+        this.x = x;
+        this.y = y;
+        this.z = z;
+    }
+   
+    public float getX(){
+        return x;
+    }
+    public float getY(){
+        return y;
+    }
+    public float getZ(){
+        return z;
+    }
+   
+    public void setX(float a){
+            this.x = (float) a;
+        }      
+    public void setY(float b){
+        this.y = b;
+    }
+    public void setZ(float c){
+        this.z = c;
+    }
+    public void skalarny(Wektor k){
+        float wynik1 = k.x * x;
+        float wynik2 = k.y * y;
+        float wynik3 = k.z * z;
+       
+        System.out.println("Iloczyn skalarny dwóch wektorów = (" + wynik1 + "," + wynik2 + "," + wynik3 + ")");
+       
+    }
+    public void wektorowy(Wektor k){
+        float wynik1 = (k.y*z) - (k.z*y);
+        float wynik2 = (k.z*x) - (k.x*z);
+        float wynik3 = (k.x*y) - (k.y*x);
+       
+        System.out.println("Iloczyn wektorowy dwóch wektorów = (" + wynik1 + "," + wynik2 + "," + wynik3 + ")");
+    }
+   
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+package wektory;
+import java.util.InputMismatchException;
+import java.util.Scanner;
+ 
+public class Wektory {
+ 
+    public static void main(String[] args) {
+        Scanner scan = new Scanner(System.in);
+        float a = 0;
+        float b = 0;
+        float c = 0;
+       
+       
+        System.out.println("Podaj x, y, z: ");
+        try{
+            a = scan.nextFloat();
+            b = scan.nextFloat();
+            c = scan.nextFloat();
+        }catch(InputMismatchException exc){
+            System.err.println("Wartość musi być liczbą!");
+        }
+       
+        Wektor W1 = new Wektor(a,b,c);
+        Wektor W2 = new Wektor(9,8,7);
+       
+        System.out.println("Wektor W1:");
+        System.out.println(W1.getX());
+        System.out.println(W1.getY());
+        System.out.println(W1.getZ());
+       
+        System.out.println("Wektor W2:");
+        System.out.println(W2.getX());
+        System.out.println(W2.getY());
+        System.out.println(W2.getZ());
+       
+        W2.setX(3);
+        W2.setY(4);
+        W2.setZ(5);
+       
+        System.out.println("Wektor W2 po zmianie:");
+        System.out.println(W2.getX());
+        System.out.println(W2.getY());
+        System.out.println(W2.getZ());
+       
+        W1.skalarny(W2);
+        W1.wektorowy(W2);
+        W2.wektorowy(W1);
+    }
+}
