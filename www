@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Javascript - Add HTML Table Row </title>
+
+        
+        <script>
+            
+            function addRow()
+            {
+                // get input values
+                var fname = document.getElementById('fname').value;
+                 var lname = document.getElementById('lname').value;
+                  var age = document.getElementById('age').value;
+				   var email = document.getElementById('email').value;
+				    var data = document.getElementById('data').value;
+					 var plec = document.getElementById('plec').value;
+					  var grupa = document.getElementById('grupa').value;
+                  
+                  // get the html table
+                  // 0 = the first table
+                  var table = document.getElementsByTagName('table')[0];
+                  
+                  // add new empty row to the table
+                  // 0 = in the top 
+                  // table.rows.length = the end
+                  // table.rows.length/2+1 = the center
+                  var newRow = table.insertRow(table.rows.length/3+1);
+                  
+                  // add cells to the row
+                  var cel1 = newRow.insertCell(0);
+                  var cel2 = newRow.insertCell(1);
+                  var cel3 = newRow.insertCell(2);
+				  var cel4 = newRow.insertCell(3);
+				  var cel5 = newRow.insertCell(4);
+				  var cel6 = newRow.insertCell(5);
+				  var cel7 = newRow.insertCell(6);
+                  
+                  // add values to the cells
+                  cel1.innerHTML = fname;
+                  cel2.innerHTML = lname;
+                  cel4.innerHTML = age;
+				  cel3.innerHTML = email;
+				  cel5.innerHTML = data;
+				  cel6.innerHTML = plec;
+				  cel7.innerHTML = grupa;
+            }
+            
+        </script>
+        
+    </head>
+
+    <body>
+        
+        First Name: <input type="text" name="fname" id="fname" /><br/><br/>
+        Last Name: <input type="text" name="lname" id="lname" /><br/><br/>
+        Age: <input type="numer" name="age" id="age" /><br/><br/>
+		Email: <input type="email" name="email" id="email" /><br/><br/>
+		Data Urodzenia: <input type="date" name="data" id="data" /><br/><br/>
+		Plec:<br>
+		Meska:<input type="radio" name="gender" value="male" id="plec"/><br/><br/> 
+		Żenska:<input type="radio" name="gender1" value="female" id="plec"/><br/><br/> 
+		Grupa: <input type="email" name="email" id="grupa" /><br/><br/>
+        <button onclick="addRow();">Add Row</button><br/><br/>
+
+        <table border="1">
+            
+            <tr>
+                <th>Imie</th>
+                <th>Nazwisko</th>
+                <th>Email</th>
+				<th>Wiek</th>
+				<th>Data Urodzenia</th>
+				<th>Plec</th>
+				<th>Grupa</th>
+            </tr>
+            
+
+            
+        </table>
+
+    </body>
+
+</html>
