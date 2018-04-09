@@ -1,0 +1,165 @@
+package zadanie1;
+
+
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+import java.io.IOException;
+import java.io.PrintWriter;
+
+public class Zadanie1{
+
+   
+    public static void main(String[] args) throws IOException, Dane, FileNotFoundException{
+        Scanner sc=new Scanner(System.in);
+        
+        int dlugosc,szerokosc,wysokosc;
+        
+        System.out.println("Podaj dlugosc: ");
+        dlugosc=sc.nextInt(); wyjatek(dlugosc);
+        System.out.println("Podaj szerokosc: ");
+        szerokosc=sc.nextInt(); wyjatek(szerokosc);
+        System.out.println("Podaj wysokosc: ");
+        wysokosc=sc.nextInt(); wyjatek(wysokosc);
+        
+        Kwadrat k = new Kwadrat(dlugosc);
+        Prostokat p = new Prostokat(dlugosc,szerokosc);
+        Prostopadloscian pr = new Prostopadloscian(dlugosc,szerokosc,wysokosc);
+        
+        System.out.println("Dlugosc: " + k.getDlugosc() + " Pole: "+ k.pole());
+        System.out.println("Dlugosc: " + p.getDlugosc() + " Szerokosc: " +p.getSzerokosc()+ " Pole: "+ p.pole());
+        System.out.println("Dlugosc: " + pr.getDlugosc() + " Szerokosc: " +pr.getSzerokosc()+" Wysokosc: "+pr.getWysokosc()+ " Pole: "+ pr.pole());
+        
+        try (PrintWriter zapis = new PrintWriter("Zadanie1.txt")) {
+            zapis.println(k.getDlugosc()+" "+k.pole());
+            zapis.println(p.getDlugosc()+" "+p.getSzerokosc()+" "+p.pole());
+            zapis.println(pr.getDlugosc()+" "+pr.getSzerokosc()+" "+pr.getWysokosc()+" "+pr.pole());
+            
+        }
+    
+    }
+    
+    public static void wyjatek(int a) throws Dane{
+        if(a<0 || a==0){
+            throw new Dane("Mniejsza lub rowna zero");
+    }
+    }
+}
+
+--------------------------------------------------------------------------------------------------------------------------------------------
+
+package zadanie1;
+
+
+public class Kwadrat {
+    
+    private static int id;
+    private int dlugosc;
+
+    public Kwadrat() {
+        this.dlugosc=1;
+    }
+
+    public Kwadrat(int b) {
+        this.dlugosc = b;
+    }
+    
+    public Kwadrat(Kwadrat k) {
+        this.dlugosc=k.dlugosc;
+    }
+
+    public int getDlugosc() {
+        return dlugosc;
+    }
+
+    public static int getId() {
+        return id;
+    }
+    
+    public int pole(){
+        return dlugosc*dlugosc;
+    }
+  
+}
+
+------------------------------------------------------------------------------------------------------------------
+
+package zadanie1;
+
+
+public class Prostokat extends Kwadrat{
+    private int szerokosc;
+
+    public Prostokat() {
+        super();
+        this.szerokosc=1;
+    }
+
+    public Prostokat(int szerokosc, int b) {
+        super(b);
+        this.szerokosc = szerokosc;
+    }
+
+    public Prostokat(int szerokosc, Kwadrat k) {
+        super(k);
+        this.szerokosc = szerokosc;
+    }
+
+    public int getSzerokosc() {
+        return szerokosc;
+    }
+
+    public int pole(){
+        return getDlugosc()*szerokosc;
+    }
+
+}
+
+---------------------------------------------------------------------------------------------------------------------------------
+
+package zadanie1;
+public class Prostopadloscian extends Prostokat {
+    private int wysokosc;
+
+    public Prostopadloscian() {
+        super();
+        this.wysokosc=1;
+    }
+
+    public Prostopadloscian(int wysokosc, int szerokosc, int b) {
+        super(szerokosc, b);
+        this.wysokosc = wysokosc;
+    }
+
+    public Prostopadloscian(int wysokosc, int szerokosc, Kwadrat k) {
+        super(szerokosc, k);
+        this.wysokosc = wysokosc;
+    }
+
+    public int getWysokosc() {
+        return wysokosc;
+    }
+    
+    @Override
+    public int pole(){
+        return 2*getDlugosc()*getSzerokosc()+2*getDlugosc()*wysokosc+2*getSzerokosc()*wysokosc;
+    }
+
+}
+
+--------------------------------------------------------------------------------------------------------------------
+
+package zadanie1;
+
+
+public class Dane extends Exception {
+
+  
+    public Dane() {
+    }
+
+ 
+    public Dane(String msg) {
+        super(msg);
+        System.err.println(msg);
+    }
+}
