@@ -1,0 +1,173 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package zadanie4;
+
+/**
+ *
+ * @author wyruu
+ */
+public class Zadanie4 {
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        // TODO code application logic here
+    }
+  
+    
+}
+
+interface Jedzie{
+    
+     void jedz(int j);
+}
+interface Plywa{
+    
+    void plyn();
+}
+interface Lata{
+    
+    void lec();
+}
+----------------------------------------------------------------------------------------
+package zadanie4;
+
+
+public class Pojazd {
+        private String nazwa;
+        private int predkosc;
+
+    public Pojazd(String nazwa, int predkosc) {
+        this.nazwa = nazwa;
+        this.predkosc = predkosc;
+    }
+
+    public String getNazwa() {
+        return nazwa;
+    }
+
+    public int getPredkosc() {
+        return predkosc;
+    }
+         
+}
+----------------------------------------------------------------------------------------------
+package zadanie4;
+
+
+public class Samolot extends Pojazd implements Lata{
+
+    public Samolot(String nazwa, int predkosc) {
+        super(nazwa, predkosc);
+    }
+
+    @Override
+    public void lec() {
+        System.out.println(getNazwa()+" Samolot "+" leci "+getPredkosc());
+    }
+    
+
+    
+}
+------------------------------------------------------------
+package zadanie4;
+
+
+public class Statek extends Pojazd implements Plywa{
+
+    public Statek(String nazwa, int predkosc) {
+        super(nazwa, predkosc);
+    }
+
+    @Override
+    public void plyn() {
+         System.out.println(getNazwa()+" Statek "+" plynie "+getPredkosc());
+    }
+    
+}
+-------------------------------------------------------------------------------------------------
+package zadanie4;
+
+
+public class Hydroplan extends Pojazd implements Lata, Plywa{
+
+    public Hydroplan(String nazwa, int predkosc) {
+        super(nazwa, predkosc);
+    }
+
+    @Override
+    public void lec() {
+        System.out.println(getNazwa()+" Hydroplan "+" leci "+getPredkosc());
+    }
+
+    @Override
+    public void plyn() {
+         System.out.println(getNazwa()+" Hydroplan "+" plynie "+getPredkosc());
+    }
+    
+}
+--------------------------------------------------------------------------------------------
+package zadanie4;
+
+
+public class Pociag extends Pojazd implements Jedzie{
+
+    public Pociag(String nazwa, int predkosc) {
+        super(nazwa, predkosc);
+    }
+
+    @Override
+    public void jedz(int j) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+}
+-------------------------------------------------------------
+package zadanie4;
+
+
+public class Samochod extends Pojazd implements Jedzie{
+    
+    private String marka;
+    private int przebieg;
+
+    public Samochod(String marka, int przebieg, String nazwa, int predkosc) {
+        super(nazwa, predkosc);
+        this.marka = marka;
+        this.przebieg = przebieg;
+    }
+
+
+
+    @Override
+    public void jedz(int j) {
+        this.przebieg+=j;
+        System.out.println(getNazwa()+" dlugosc trasy: "+j+" przebieg: "+ przebieg);
+    }
+    
+}
+----------------------------------------------------------------------------------------
+package zadanie4;
+
+
+public class RoznePojazdy {
+    
+    Jedzie R1=new Jedzie() {
+        @Override
+        public void jedz(int j) {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+    };
+    Lata R2=new Lata() {
+        @Override
+        public void lec() {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+    };
+
+}
+-----------------------------------------------------------------------------------------------------------------
