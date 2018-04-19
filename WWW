@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title></title>
+    </head>
+    <body>
+        <?php
+        
+        ?>
+        <form action="stronka2.php" method="post">
+        Liczba wierszy <input type="number" name="wierszy">
+        </br></br>
+        Liczba kolumn <input type="number" name="kolumn">
+        </br></br>
+        Szerokosc komorki <input type="number" name="szerokosc">
+        </br></br>
+        Wysokosc komorki <input type="number" name="wysokosc">
+        </br></br>
+        Obramowanie</br>
+        <input type="radio" name="gender" value="tak" checked> Wyświetlaj<br>
+        <input type="radio" name="gender" value="nie"> Nie wyświetlaj<br>
+        </br>
+        Kolor obramowania</br>
+        <select name="kolor">
+        <option value="red">Czerwony</option>
+        <option value="green">Zielony</option>
+        <option value="blue">Niebieski</option> 
+        </select>
+        </br></br>
+        <input type="text" name="pole">
+        </br></br>
+        <input type="submit" value="Wyslij">
+        
+
+        </br></br>
+
+
+        </form>
+    
+        
+    </body>
+</html>
