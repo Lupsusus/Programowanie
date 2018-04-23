@@ -1,0 +1,62 @@
+---------------1
+CLO
+START:
+	MOV 	BL, C0
+REP:
+	IN	00
+	MOV	[BL], AL
+	INC	BL
+	CMP	BL, 00
+	JZ	START
+  
+  ----------------------2
+  CLO	
+START:		
+	MOV 	BL, 30
+REP:
+	IN	00	
+	CMP	AL, 0D	
+	JZ	XD	
+	MOV	[BL], AL
+	INC 	BL	
+	JMP 	REP	
+XD:
+	MOV 	CL, C0		
+	MOV	AL, 30
+WYPISZ:
+	MOV	DL, [AL]	
+	MOV	[CL], DL	
+	INC 	AL		
+	CMP	AL, BL		
+	JZ	END_LABEL	
+	INC	CL		
+	JMP WYPISZ		
+END_LABEL:
+	END
+  -------------------------3
+  CLO ;
+START:      
+	MOV     BL, 50
+REP:
+	IN  00  	
+	CMP AL, 0D  	
+	JZ  XD  	
+	MOV [BL], AL	
+	INC     BL  	
+	JMP     REP 	
+XD:
+	MOV     CL, C0    
+	DEC	BL		
+	MOV	AL, 90		
+	MOV	[AL],BL
+	MOV	AL, [90]
+WYPISZ:
+    MOV DL, [AL]    	
+    MOV [CL], DL    	
+    DEC     AL      	
+    CMP AL, 4F     
+    JZ  END_LABEL 
+    INC CL      
+    JMP WYPISZ     
+END_LABEL:
+    END
