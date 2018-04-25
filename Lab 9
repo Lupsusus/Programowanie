@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="Stylesheet" type="text/css" href="style.css"/>
+    <link rel="Stylesheet" type="text/css" href="stylekomentarzy.css"/>
+
+</head>
+<body>
+
+<div class="container">
+
+<header>
+   <h1>City Gallery</h1>
+</header>
+  
+<article>
+  <h1>London</h1>
+  <p>London is the capital city of England. It is the most populous city in the  United Kingdom, with a metropolitan area of over 13 million inhabitants.</p>
+  <p>Standing on the River Thames, London has been a major settlement for two millennia, its history going back to its founding by the Romans, who named it Londinium.</p>
+
+
+</article>
+    
+        <form method="post" action="dodajkomentarz.php">
+      Nick: <input type="text" name="nick" required></br></br>
+      <textarea name="kom" rows="5" cols="50" required></textarea></br>
+      <input type="submit" value="Dodaj komentarz">
+  
+  </form>
+    
+      <?php
+$myfile = fopen("komentarze.txt", "r");
+
+
+$line = fgets($myfile);
+$pom=0;
+while(! feof($myfile))
+{   
+    $pom++;
+    if($pom==1){
+        echo "</br>";
+        echo "<div class=".'"kom">';
+        echo "<p>".$line;
+    }
+
+    else if($pom==2){
+        echo $line."</p>";
+    }
+     
+    else{
+        echo "<p>".$line."</p>";
+        echo "</div>";
+        
+        $pom=0;
+    }
+    
+    $line = fgets($myfile);
+
+
+}
+
+fclose($myfile);
+?>
+    
+</div>
+
+<footer></footer>
+</body>
+</html>
+------------------------------------------------------------------------------
+<?php
+
+$nick=$_POST["nick"];
+
+$komentarz=$_POST["kom"];
+
+
+
+$myfile = fopen("komentarze.txt", "a") or die("Unable to open file!");
+
+fwrite($myfile, date("Y/m/d h:i:sa\r\n"));
+
+fwrite($myfile, $nick."\r\n");
+fwrite($myfile, $komentarz."\r\n");
+
+
+fclose($myfile);
+
+
+header('Location: index.php');
+
+?>
+--------------------------------------------------------------------------
+.container {
+    width: 100%;
+    
+}
+
+header, footer {
+    padding: 1em;
+    color: white;
+    background-color: black;
+    clear: left;
+    text-align: center;
+}
+
+
+
+article {
+    
+   
+    padding: 1em;
+    overflow: hidden;
+}
+-------------------------------------------------------------------
+.kom{
+    color:white;
+    background-color: grey;
+    border: dashed;
+    border-color: black;
+    height: 100px;
+    width: 500px;
+    
+}
