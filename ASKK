@@ -1,0 +1,150 @@
+ZADANIE 1:
+START:
+    MOV AL, 90  ;10010000 PIERWSZE TRZY CYFRY DLA PIERWSZJE SYGNALIZACJI, DRUGIE TRZY (TJ.4, 5, 6)CYFRY SĄ DLA DRUGIEJ SYGNALIZACJI, A RESZTA NIE WIEM PO CO :)
+    OUT 01
+    MOV AL, 48  ;01001000
+    OUT 01
+    MOV AL, 24  ;00100100
+    OUT 01
+    MOV AL, 48  ;01001000
+    OUT 01
+    JMP START
+END
+ 
+ZADANIE 2: (hexa i po diodach liczę)
+MOV AL, FB
+OUT 02
+MOV AL, 0A
+OUT 02
+END
+ 
+ZADANIE 3:
+HOT:
+    MOV AL, 0
+    OUT     03
+ 
+SPR:
+    IN  03
+    AND AL, 01
+    JZ  COLD
+    JMP     HOT
+ 
+COLD:
+    MOV AL, 80
+    OUT 03
+    JMP     SPR
+ 
+END
+ 
+ZADANIE 4:
+MOV AL, FF  ;ZEROWANIE WĘŻA
+    OUT 04
+ 
+    MOV BL, 0A  ;ILE POWTORZEN
+DOWN:
+    MOV AL, 4F  ;RUCH W DOL O 15(F)KROKOW
+    OUT 04  ;WYSLAC DO WEZA
+    DEC     BL  ;ZMIEJSZYC BL(LICZNIK)
+    JNZ     DOWN    ;JESLI JESZCZE JEST BL TO POWTARZAJ
+ 
+    MOV     BL, 03
+RIGHT:
+    MOV     AL, 1F
+    OUT 04
+    DEC BL
+    JNZ RIGHT
+ 
+    MOV BL, 05
+UP:
+    MOV     AL, 8F
+    OUT 04
+    DEC BL
+    JNZ UP
+ 
+    MOV     BL, 03
+RIGHT2:
+    MOV     AL, 1F
+    OUT 04
+    DEC BL
+    JNZ RIGHT2
+ 
+    MOV BL, 05
+DOWN2:
+    MOV     AL, 4F
+    OUT 04
+    DEC BL
+    JNZ DOWN2
+ 
+    MOV     BL, 02
+RIGHT3:
+    MOV     AL, 1F
+    OUT 04
+    DEC BL
+    JNZ RIGHT3
+ 
+    MOV BL, 07
+UP2:  
+    MOV     AL, 8F
+    OUT 04
+    DEC BL
+    JNZ UP2
+ 
+    MOV BL, 05
+LEFT:
+    MOV AL, 2F
+    OUT 04
+    DEC BL
+    JNZ LEFT
+ 
+    MOV BL, 03
+UP3:  
+    MOV     AL, 8F
+    OUT 04
+    DEC BL
+    JNZ UP3
+ 
+    MOV     BL, 07
+RIGHT4:
+    MOV     AL, 1F
+    OUT 04
+    DEC BL
+    JNZ RIGHT4
+ 
+    MOV BL, 0B
+DOWN3:
+    MOV AL, 4F
+    OUT 04
+    DEC     BL
+    JNZ     DOWN3
+END
+ 
+ZADANIE 5:
+;PELEN_KROK:
+;   MOV AL, 8
+;   OUT 05
+;   MOV AL, 4
+;   OUT 05
+;   MOV AL, 2
+;   OUT 05
+;   MOV AL, 1
+;   OUT 05
+;   JMP PELEN_KROK
+POL_KROK:
+    MOV AL, 8
+    OUT 05
+    MOV AL, C
+    OUT 05
+    MOV     AL, 4
+    OUT 05
+    MOV AL, 6
+    OUT 05
+    MOV AL, 2
+    OUT 05
+    MOV AL, 3
+    OUT 05
+    MOV AL, 1
+    OUT 05
+    MOV AL, 9
+    OUT 05
+    JMP     POL_KROK
+END
