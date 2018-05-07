@@ -1,0 +1,36 @@
+package zad1;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+public class Okienko extends JFrame {
+private JLabel A,B,Wynik;
+
+private static JTextField t1,t2;
+private JButton bOK;
+private JButton bClose;
+Okienko () {
+setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+setSize(400,100);
+setLayout(new FlowLayout());
+add(A=new JLabel("A"));
+
+add(t1=new JTextField(10));
+add(B=new JLabel("B"));
+add(t2=new JTextField(10));
+add(Wynik=new JLabel("Wynik"));
+add(bOK=new JButton("Oblicz"));
+add(bClose=new JButton("Zamknij"));
+bOK.addActionListener(new ActionListener() {
+public void actionPerformed(ActionEvent e) {   
+JOptionPane.showMessageDialog(null,"Suma to: \t"+  suma(7,6)); } } );
+bClose.addActionListener(new ActionListener() {
+public void actionPerformed(ActionEvent e) {
+System.exit(0); } } );
+setVisible(true);
+
+} 
+public int suma(int a,int b){
+        return a+b;
+    }
+}
