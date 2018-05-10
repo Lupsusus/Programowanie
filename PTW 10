@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Blog</title>
+        <link rel="Stylesheet" type="text/css" href="style.css"/>
+    </head>
+    <body>
+   <div id="container">     
+       <h1>Post</h1>
+       <article>.................................................</br>
+           .................................................</br>
+           .................................................
+       </article>
+       
+       </br>
+      <form method="post" action="insert.php">   
+      <input type="text" name="nick" required></br></br>
+      <textarea name="tresc" rows="5" cols="50" required></textarea></br>
+      <input type="submit" value="Dodaj komentarz">
+  
+     </form>
+       
+          
+       
+       </br>
+       
+ <?php
+        
+        $servername = "localhost";
+        $username = "root";
+        $password = "";
+        $dbname = "blog";
+
+        // Create connection
+        $conn = new mysqli($servername, $username, $password, $dbname);
+        // Check connection
+        if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
+        } 
+
+        $sql = "SELECT Id, nick, tresc, data FROM Komentarze";
+        $result = $conn->query($sql);
+
+        if ($result->num_rows > 0) {
+            // output data of each row
+            while($row = $result->fetch_assoc()) {
+
+                echo "<div class='klasa'>". date("Y/m/d  h:i", strtotime($row["data"]))."  ".$row["nick"] ."<p>". $row["tresc"]."</p>"."</div>";
+               
+            }
+        } else {
+            echo "0 results";
+        }
+        $conn->close();
+        
+       
+?>s
+        
+   </div>
+    </body>
+</html>
+
+==================================================================================
+
+<?php
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "Blog";
+
+$nazwa=$_POST['nick'];
+$zawartosc=$_POST['tresc'];
+
+// Create connection
+$conn = mysqli_connect($servername, $username, $password, $dbname);
+// Check connection
+if (!$conn) {
+    die("Connection failed: " . mysqli_connect_error());
+}
+
+$sql = "INSERT INTO Komentarze (nick, tresc)
+VALUES ('$nazwa', '$zawartosc')";
+
+if (mysqli_query($conn, $sql)) {
+    echo "New record created successfully";
+} else {
+    echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+}
+
+mysqli_close($conn);
+header('Location: index.php');
+
+?>
+
+======================================================================================
+
+#container{
+    
+    
+}
+.klasa{
+    border: 2px solid blue;
+    border-radius: 8px;
+    
+}
+p{
+    margin-left: 30px;
+    
+}
+
+========================================================================================
+
+
