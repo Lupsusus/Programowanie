@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <style>table,td,th{border: solid black;}</style>
+        <meta charset="UTF-8">
+        <title></title>
+    </head>
+    <body>
+<?php
+        
+        $servername = "localhost";
+        $username = "root";
+        $password = "";
+        $dbname = "blogdb";
+
+        // Create connection
+        $conn = new mysqli($servername, $username, $password, $dbname);
+        // Check connection
+        if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
+        } 
+
+        $sql = "SELECT * FROM Kategorie";
+        $result = $conn->query($sql);
+
+        if ($result->num_rows > 0) {
+            // output data of each row
+            while($row = $result->fetch_assoc()) {
+
+            echo $row["nazwa"].", ";
+                 
+            }
+        } else {
+            echo "0 results";
+        }
+        
+        echo "<table><tr><th>Tytuł</th> <th>Nazwa Kategorii</th><th>Data dodania postów</th></tr> ";
+        
+        $sql = "SELECT p.id, p.tytul, k.nazwa, p.data FROM posty p, kategorie k WHERE p.idKategorii = k.id";
+        
+        $result = $conn->query($sql);
+        if ($result->num_rows > 0) {
+            // output data of each row
+            while($row = $result->fetch_assoc()) {
+
+            echo "<tr>";
+                echo "<td>"."<a href='post.php?id=".$row["id"]."'>".$row["tytul"]."</a></td>";
+                //echo "<td><a href='post.php'>".$row["tytul"]."</a></td>";
+                echo "<td>".$row["nazwa"]."</td>";
+                echo "<td>".$row["data"]."</td>";
+            
+            echo "</tr>";
+            }
+                 
+            }
+         else {
+            echo "0 results";
+        }
+        
+        $conn->close();     
+?>   
+        
+
+    </body>
+</html>
