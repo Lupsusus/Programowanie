@@ -1,0 +1,210 @@
+package lab3;
+
+
+public class Element {
+    public int dane;
+    public Element next;
+    
+    
+}
+----------------------------------------------------------------
+
+package lab3;
+
+
+public interface IStos {
+    public void push(int i);
+    public int pop ();
+    public int peek();
+    public boolean isEmpty();
+    public void print();
+    public void clear();
+}
+-----------------------------------------------------------------------
+package lab3;
+
+public class Lab3 {
+
+  
+    public static void main(String[] args) {
+        Stos s = new Stos();
+        s.push(1);
+        s.push(2);
+        s.push(3);
+        s.push(4);
+        s.pop();
+        s.print();
+        System.out.println();
+        System.out.println(s.peek());
+        s.clear();
+        s.push(2);
+        s.print();
+
+        Stos k = new Stos();
+        System.out.println("");
+        System.out.println("nawiasy");
+        
+        String x = "(()))";
+         if(k.Nawiasy(x) == true){
+            System.out.println("prawidlowe");
+        }
+        else{
+            System.out.println("nie prawidlowe");
+        }
+         
+        System.out.println("Palindrom");
+        Stos p = new Stos();
+        if(p.palindrom("kajak")==true){
+            System.out.println("Jest palindromem");
+        }
+        else{
+            System.out.println("Nie jest palindromem");
+        }
+        
+        Stos c = new Stos();
+        c.notacja("25+7*");
+    }
+}
+
+------------------------------------------------------------------------------------------
+
+package lab3;
+
+public class Stos implements IStos {
+
+    Element top;
+
+    public Stos() {
+        top = null;
+    }
+
+    @Override
+    public void push(int i) {
+        Element x;
+        x = new Element();
+        x.next = top;
+        x.dane = i;
+        top = x;
+
+    }
+
+    @Override
+    public int pop() {
+        int pom = 0;
+        if (top == null) {
+            System.out.print("");
+        } else {
+            pom = top.dane;
+            top = top.next;
+
+        }
+        return pom;
+    }
+
+    @Override
+    public int peek() {
+        return top.dane;
+    }
+
+    @Override
+    public boolean isEmpty() {
+        if (top == null) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    @Override
+    public void print() {
+        Element f = top;
+        while (f != null) {
+            System.out.print(f.dane + " ");
+            f = f.next;
+        }
+    }
+
+    @Override
+    public void clear() {
+        while (top != null) {
+            pop();
+        }
+    }
+
+    public boolean Nawiasy(String x) {
+        for (int i = 0; i < x.length(); i++) {
+
+            if (x.charAt(i) == 40) {
+                push(x.charAt(i));
+            }
+            if (isEmpty() == true) {
+                return false;
+            }
+            if (x.charAt(i) == 41) {
+                pop();
+            }
+        }
+        if (isEmpty() == true) {
+            return true;
+        } else {
+            return false;
+        }
+
+    }
+
+    public boolean palindrom(String napis) {
+        int x;
+        for (int i = 0; i < napis.length(); i++) {
+            push(napis.charAt(i));
+
+        }
+        for (int i = 0; i < napis.length(); i++) {
+            if (top != null) {
+                x = peek();
+                pop();
+                int y = napis.charAt(i);
+                if (y != x) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    public void notacja(String x) {
+        int a, b;
+        for (int i = 0; i < x.length(); i++) {
+        if (x.charAt(i) < 48) {
+            a = pop();
+            b = pop();
+
+            switch (x.charAt(i)) {
+
+                case 47:
+                    push(a / b);
+                    System.out.println(peek());
+                    break;
+
+                case 45:
+                    push(a - b);
+                    System.out.println(peek());
+                    break;
+
+                case 43:
+                    push(a + b);
+                    System.out.println(peek());
+                    break;
+
+                case 42:
+                    push(a * b);
+                    System.out.println(peek());
+                    break;
+
+            }
+        } else {
+            push(Character.getNumericValue(x.charAt(i)));
+        }
+
+    }
+}
+}
